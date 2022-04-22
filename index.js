@@ -1,9 +1,9 @@
 const inquirer = require("inquirer");
-const Employee = require("./lib/employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
-
+const htmlBuilder = require("./src/htmlBuilder");
+let teamMembersArr = [];
 
 const promptInput = (name, type, message, choices = []) => {
     return inquirer.prompt([
@@ -17,48 +17,47 @@ const promptInput = (name, type, message, choices = []) => {
 };
 
 const buildMember = async (role) => {
-    const memberName = await promptInput(`${role}Name`, "input", `Please enter ${role}'s name:`);
-    const memberId = await promptInput(`${role}Id`, "input", `Please enter ${role}'s ID:`);
-    const memberEmail = await promptInput(`${role}Email`, "input", `Please enter ${role}'s email address:`);
+    let member = {};
+    const name = await promptInput(`${role}`, "input", `Please enter ${role}'s name:`);
+    const id = await promptInput(`${role}`, "input", `Please enter ${role}'s ID:`);
+    const email = await promptInput(`${role}`, "input", `Please enter ${role}'s email address:`);
     if (role == "Manager") {
-        const officeNumber = await promptInput(`${role}Name`, "input", `Please enter ${role}'s office number:`);
-        const manager = new Manager(memberName, memberId, memberEmail, officeNumber);
-        // console.log(manager);
-        return manager;
+        const office = await promptInput(`${role}`, "input", `Please enter ${role}'s office number:`);
+        const manager = new Manager(name.Manager, id.Manager, email.Manager, office.Manager);
+        member = manager;
     } else if (role == "Engineer") {
-        const github = await promptInput(`${role}Name`, "input", `Please enter ${role}'s github:`);
-        const engineer = new Engineer(memberName, memberId, memberEmail, github);
-        console.log(engineer);
-        return engineer;
+        const github = await promptInput(`${role}`, "input", `Please enter ${role}'s github:`);
+        const engineer = new Engineer(name.Engineer, id.Engineer, email.Engineer, github.Engineer);
+        member = engineer;
     } else if (role == "Intern") {
-        const school = await promptInput(`${role}Name`, "input", `Please enter ${role}'s school:`);
-        const intern = new Intern(memberName, memberId, memberEmail, school);
-        console.log(intern);
-        return intern;
+        const school = await promptInput(`${role}`, "input", `Please enter ${role}'s school:`);
+        const intern = new Intern(name.Intern, id.Intern, email.Intern, school.Intern);
+        member = intern;
     }
+    teamMembersArr.push(member)
+    const addMoreMember = await moreMember();
+    if(addMoreMember == true) {
+        chooseTeamMember();
+    }
+    return teamMembersArr;
 }
 
-
-let teamMembersArr = [];
-const chooseRole = async () => {
-    const role = await promptInput("chooseTeamMember", "list", "Please choose your team member's role:", ["Engineer", "Intern"]);
-    console.log(role);
-    buildMember(role.chooseTeamMember);
+const moreMember = async () => {
+    const addMoreMember = await promptInput("moreMember", "confirm", "Do you wish to add another team member?");
+    if (addMoreMember.moreMember) {
+        await chooseTeamMember();
+    };
 };
 
-// will return an array of team members objects 
-const addTeamMembers = async () => {
-    await chooseRole();
-
-    const addMoreMember = await promptInput("moreMember", "confirm", "Do you wish to add another team member?");
-    if (addMoreMember.moreMember) addTeamMembers();
-
+const chooseTeamMember = async () => {
+    const role = await promptInput("chooseTeamMember", "list", "Please choose your team member's role:", ["Engineer", "Intern"]);
+    await buildMember(role.chooseTeamMember);
 };
 
 const init = async () => {
-    const manager = await buildMember("Manager");
-    console.log(manager);
-    await chooseRole();
+    // Start building with the first team member as Manager.
+    const team = await buildMember("Manager");
+    const htmlBuildTeam = htmlBuilder.buildTeam(team);
 }
 
 init();
