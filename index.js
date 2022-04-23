@@ -1,8 +1,9 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
-const htmlBuilder = require("./src/htmlBuilder");
+const render = require("./src/render");
 let teamMembersArr = [];
 
 const promptInput = (name, type, message, choices = []) => {
@@ -57,7 +58,10 @@ const chooseTeamMember = async () => {
 const init = async () => {
     // Start building with the first team member as Manager.
     const team = await buildMember("Manager");
-    const htmlBuildTeam = htmlBuilder.buildTeam(team);
+    const buildTeam = `${render.html(team)}`;
+
+    // console.log(generateHTML);
+    fs.writeFileSync("./dist/index.html", buildTeam);
 }
 
 init();
