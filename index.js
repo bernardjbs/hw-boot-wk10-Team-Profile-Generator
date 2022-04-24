@@ -6,38 +6,58 @@ const Intern = require("./lib/intern");
 const render = require("./src/render");
 let teamMembersArr = [];
 
-const promptInput = (name, type, message, choices = []) => {
+const validation = (input, inputType='') => {
+    if(!input) {
+        return "Your input is empty, please try again";
+    }
+    else if(inputType == "number" && isNaN(input)){
+        return "Your input is not valid, please input a number";
+    }
+    else if(inputType == "email" && !input.match(/\S+@\S+\.\S+/)) {
+        return "Your input is invalid, please enter a valid email address"
+    }
+    else if(inputType == "url" && !input.match(/^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/)) {
+        return "Your input is invalid, please enter a valid URL"
+    }
+    else if(inputType == "confirm") {
+        return "confirm";
+    }
+    else{return true} 
+};
+
+const promptInput = (name, type, message, choices = [], validate) => {
     return inquirer.prompt([
         {
             name: name,
             type: type,
             message: message,
-            choices: choices
+            choices: choices, 
+            validate: validate
         }
     ]);
 };
 
 const buildMember = async (role) => {
     let member = {};
-    const name = await promptInput(`${role}`, "input", `Please enter ${role}'s name:`);
-    const id = await promptInput(`${role}`, "input", `Please enter ${role}'s ID:`);
-    const email = await promptInput(`${role}`, "input", `Please enter ${role}'s email address:`);
+    const name = await promptInput(`${role}`, "input", `Please enter ${role}'s name:`, [], (input) => validation(input));
+    const id = await promptInput(`${role}`, "input", `Please enter ${role}'s ID:`, [], (input) => validation(input, "number"));
+    const email = await promptInput(`${role}`, "input", `Please enter ${role}'s email address:`, [], (input) => validation(input, "email"));
     if (role == "Manager") {
-        const office = await promptInput(`${role}`, "input", `Please enter ${role}'s office number:`);
+        const office = await promptInput(`${role}`, "input", `Please enter ${role}'s office number:`, [], (input) => validation(input, "number"));
         const manager = new Manager(name.Manager, id.Manager, email.Manager, office.Manager);
         member = manager;
     } else if (role == "Engineer") {
-        const github = await promptInput(`${role}`, "input", `Please enter ${role}'s github:`);
+        const github = await promptInput(`${role}`, "input", `Please enter ${role}'s github:`, [], (input) => validation(input, "url"));
         const engineer = new Engineer(name.Engineer, id.Engineer, email.Engineer, github.Engineer);
         member = engineer;
     } else if (role == "Intern") {
-        const school = await promptInput(`${role}`, "input", `Please enter ${role}'s school:`);
+        const school = await promptInput(`${role}`, "input", `Please enter ${role}'s school:`, [], (input) => validation(input));
         const intern = new Intern(name.Intern, id.Intern, email.Intern, school.Intern);
         member = intern;
     }
     teamMembersArr.push(member)
     const addMoreMember = await moreMember();
-    if(addMoreMember == true) {
+    if (addMoreMember == true) {
         chooseTeamMember();
     }
     return teamMembersArr;
@@ -59,9 +79,9 @@ const init = async () => {
     // Start building with the first team member as Manager.
     const team = await buildMember("Manager");
     const buildTeam = `${render.html(team)}`;
-
-    // console.log(generateHTML);
     fs.writeFileSync("./dist/index.html", buildTeam);
 }
-
+// todo: check for duplicate ids
 init();
+
+module.exports = {validation};
