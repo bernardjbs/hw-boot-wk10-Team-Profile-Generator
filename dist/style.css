@@ -29,32 +29,37 @@ p {
 #card-role { 
     display: flex;
     align-items: center;
-    padding-left: 20px; 
-
 }
 
 #card-name {
     display: flex;
     align-items: center;
-    padding-left: 20px;
-
 }
 
 #card-info{
-    padding-left: 20px;
     margin-top: 5px;
 }
 
 .member-card {
+    position:relative;
     padding: 10px;
     border-radius: 10px;
     background-color: var(--bgBlue);
     color: var(--yellowLight);
-    max-width: 300px;
+    width: 350px;
     padding: 1em;
     margin: 10px;
 }
 
 .role-icon {
-    width: 15%;
+    width: 70px;
+}
+
+#manager-icon {
+    position: absolute;
+    top: 15px;
+    left: 265px;
+}
+#role {
+    color: orange;
 }

@@ -19,12 +19,14 @@ describe("generateMembers", () => {
           <h2 id="name">bernard</h2>
           </section>
           <section id="card-role">
+          <section id="manager-icon">
             <img src="../src/images/manager.png" class="role-icon">
+          </section>
             <h2 id="role">Manager</h2>
           </section>
           <section id="card-info">
             <p>ID: 1</p>
-            <p>Email: bernardjbs@yahoo.com</p>
+            <p>Email: <a href="mailto:bernardjbs@yahoo.com">bernardjbs@yahoo.com</a></p>
             <p>Office Number: 10</p>
           </section>
         </section>
@@ -33,13 +35,15 @@ describe("generateMembers", () => {
           <h2 id="name">harry</h2>
           </section>
           <section id="card-role">
+          <section id="manager-icon">
             <img src="../src/images/engineer.png" class="role-icon">
-            <h2 id="role">Engineer</h2>
+          </section>
+          <h2 id="role">Engineer</h2>
           </section>
           <section id="card-info">
             <p>ID: 2</p>
-            <p>Email: harry@yahoo.com</p>
-            <p>Github: http://www.github.com/harry</p>
+            <p>Email: <a href="mailto:harry@yahoo.com">harry@yahoo.com</a></p>
+            <p>Github: <a href="http://www.github.com/harry" target="_blank">http://www.github.com/harry</a></p>
           </section>
         </section>
         <section class="member-card" id="3">
@@ -47,12 +51,14 @@ describe("generateMembers", () => {
           <h2 id="name">junior</h2>
           </section>
           <section id="card-role">
+          <section id="manager-icon">
             <img src="../src/images/intern.png" class="role-icon">
+          </section>
             <h2 id="role">Intern</h2>
           </section>
           <section id="card-info">
             <p>ID: 3</p>
-            <p>Email: junior@yahoo.com</p>
+            <p>Email: <a href="mailto:junior@yahoo.com">junior@yahoo.com</a></p>
             <p>School: UWA</p>
           </section>
         </section>`
@@ -69,7 +75,7 @@ describe("getChildMember", () => {
 
     const expectedEngineer = {
         icon: '<img src="../src/images/engineer.png" class="role-icon">', 
-        option: "Github: http://www.github.com/harry"
+        option: `Github: <a href="http://www.github.com/harry" target="_blank">http://www.github.com/harry</a>`
     };
 
     const expectedIntern = {

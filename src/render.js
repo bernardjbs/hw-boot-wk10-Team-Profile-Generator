@@ -40,12 +40,14 @@ const generateMembers = (team) => {
   <h2 id="name">${member.name}</h2>
   </section>
   <section id="card-role">
+  <section id="manager-icon">
     ${childMember.icon}
+  </section>
     <h2 id="role">${member.role}</h2>
   </section>
   <section id="card-info">
     <p>ID: ${member.id}</p>
-    <p>Email: ${member.email}</p>
+    <p>Email: <a href="mailto:${member.email}">${member.email}</a></p>
     <p>${childMember.option}</p>
   </section>
 </section>`;
@@ -61,7 +63,7 @@ const getChildMember = (member) => {
   }
   else if (member.role === "Engineer") {
     childMember.icon = `<img src="${engineerIcon}" class="role-icon">`;
-    childMember.option = `Github: ${member.github}`;
+    childMember.option = `Github: <a href="${member.github}" target="_blank">${member.github}</a>`;
   }
   else if (member.role === "Intern") {
     childMember.icon = `<img src="${internIcon}" class="role-icon">`;

@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const promptInput = require("./src/promptInput");
 const fs = require("fs");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
@@ -31,18 +32,6 @@ const validation = (input, inputType = '') => {
         return "Your input is invalid, please enter a valid URL"
     }
     else { return true }
-};
-
-const promptInput = (name, type, message, choices = [], validate) => {
-    return inquirer.prompt([
-        {
-            name: name,
-            type: type,
-            message: message,
-            choices: choices,
-            validate: validate
-        }
-    ]);
 };
 
 const buildMember = async (role) => {
