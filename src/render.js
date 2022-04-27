@@ -1,3 +1,7 @@
+const managerIcon = "../src/images/manager.png"
+const engineerIcon = "../src/images/engineer.png"
+const internIcon = "../src/images/intern.png"
+
 const html = (team) => {
   const renderHtml = `
 <!DOCTYPE html>
@@ -17,6 +21,7 @@ const html = (team) => {
         </section>
         <section id="team">
           ${generateMembers(team)}
+
         </section>    
     </section>
 </body>
@@ -28,14 +33,21 @@ const html = (team) => {
 const generateMembers = (team) => {
   str = '';
   team.forEach(member => {
-  let childMember = getChildMember(member);
-  str = str + `
+    let childMember = getChildMember(member);
+    str = str+`
 <section class="member-card" id="${member.id}">
-  <h2>${member.role}</h2>
-  <h2>${childMember.icon} ${member.name}</h2>
-  <p>ID: ${member.id}</p>
-  <p>Email: ${member.email}</p>
-  <p>${childMember.option}</p>
+<section id="card-name">
+  <h2 id="name">${member.name}</h2>
+  </section>
+  <section id="card-role">
+    ${childMember.icon}
+    <h2 id="role">${member.role}</h2>
+  </section>
+  <section id="card-info">
+    <p>ID: ${member.id}</p>
+    <p>Email: ${member.email}</p>
+    <p>${childMember.option}</p>
+  </section>
 </section>`;
   });
   return str;
@@ -44,18 +56,18 @@ const generateMembers = (team) => {
 const getChildMember = (member) => {
   const childMember = {};
   if (member.role === "Manager") {
-    childMember.icon = `[Manager Icon]`;
+    childMember.icon = `<img src="${managerIcon}" class="role-icon">`;
     childMember.option = `Office Number: ${member.officeNumber}`;
   }
   else if (member.role === "Engineer") {
-    childMember.icon = `[Engineer Icon]`;
+    childMember.icon = `<img src="${engineerIcon}" class="role-icon">`;
     childMember.option = `Github: ${member.github}`;
   }
   else if (member.role === "Intern") {
-    childMember.icon = `[Intern Icon]`;
+    childMember.icon = `<img src="${internIcon}" class="role-icon">`;
     childMember.option = `School: ${member.school}`;
   };
   return childMember;
 };
 
-module.exports = { html, generateMembers, getChildMember};
+module.exports = { html, generateMembers, getChildMember };

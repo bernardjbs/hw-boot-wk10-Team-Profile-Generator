@@ -15,44 +15,65 @@ describe("generateMembers", () => {
         const genMembers = render.generateMembers(team).replaceAll(" ", "");
         const compMembers = `
         <section class="member-card" id="1">
-            <h2>Manager</h2>
-            <h2>[Manager Icon] bernard</h2>
+        <section id="card-name">
+          <h2 id="name">bernard</h2>
+          </section>
+          <section id="card-role">
+            <img src="../src/images/manager.png" class="role-icon">
+            <h2 id="role">Manager</h2>
+          </section>
+          <section id="card-info">
             <p>ID: 1</p>
             <p>Email: bernardjbs@yahoo.com</p>
             <p>Office Number: 10</p>
+          </section>
         </section>
         <section class="member-card" id="2">
-            <h2>Engineer</h2>
-            <h2>[Engineer Icon] harry</h2>
+        <section id="card-name">
+          <h2 id="name">harry</h2>
+          </section>
+          <section id="card-role">
+            <img src="../src/images/engineer.png" class="role-icon">
+            <h2 id="role">Engineer</h2>
+          </section>
+          <section id="card-info">
             <p>ID: 2</p>
             <p>Email: harry@yahoo.com</p>
             <p>Github: http://www.github.com/harry</p>
+          </section>
         </section>
-            <section class="member-card" id="3">
-            <h2>Intern</h2>
-            <h2>[Intern Icon] junior</h2>
+        <section class="member-card" id="3">
+        <section id="card-name">
+          <h2 id="name">junior</h2>
+          </section>
+          <section id="card-role">
+            <img src="../src/images/intern.png" class="role-icon">
+            <h2 id="role">Intern</h2>
+          </section>
+          <section id="card-info">
             <p>ID: 3</p>
             <p>Email: junior@yahoo.com</p>
             <p>School: UWA</p>
+          </section>
         </section>`
-        expect(genMembers).toMatch(compMembers.replaceAll(" ", ""));
+        expect(genMembers).toBe(compMembers.replaceAll(" ", ""));
     })
 })
 
 // Test getChildMember function for Manager
 describe("getChildMember", () => {
     const expectedManager = {
-        icon: "[Manager Icon]", 
+        icon: '<img src="../src/images/manager.png" class="role-icon">', 
         option: "Office Number: 10"
     };
 
     const expectedEngineer = {
-        icon: "[Engineer Icon]", 
+        icon: '<img src="../src/images/engineer.png" class="role-icon">', 
         option: "Github: http://www.github.com/harry"
     };
 
     const expectedIntern = {
-        icon: "[Intern Icon]", 
+        icon: '<img src="../src/images/intern.png" class="role-icon">', 
         option: "School: UWA"
     };
 
