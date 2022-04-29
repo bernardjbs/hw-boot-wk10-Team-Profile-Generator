@@ -1,19 +1,4 @@
 const index = require("../index");
-const inquirer = require('inquirer');
-
-// const promptInput = index.promptInput;
-
-// jest.mock("inquirer");
-// describe("Module test", () => {
-//   test("user input", async () => {
-//     inquirer.prompt = jest
-//       .fn()
-//       .mockResolvedValue({ githubHandle: "cupacheeno" });
-//     await promptInput().then((resp) =>
-//       expect(resp).toEqual({ githubHandle: "cupacheeno" })
-//     );
-//   });
-// });
 
 // Validation tests for the user input
 describe("validation", () => {

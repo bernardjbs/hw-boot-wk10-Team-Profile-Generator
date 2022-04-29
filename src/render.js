@@ -1,7 +1,9 @@
+// Constants
 const managerIcon = "../src/images/manager.png"
 const engineerIcon = "../src/images/engineer.png"
 const internIcon = "../src/images/intern.png"
 
+// Function to render HTML
 const html = (team) => {
   const renderHtml = `
 <!DOCTYPE html>
@@ -30,6 +32,7 @@ const html = (team) => {
   return renderHtml;
 }
 
+// Function to generate team members and add them to HTML
 const generateMembers = (team) => {
   str = '';
   team.forEach(member => {
@@ -40,10 +43,10 @@ const generateMembers = (team) => {
   <h2 id="name">${member.name}</h2>
   </section>
   <section id="card-role">
-  <section id="manager-icon">
+  <section id="icons">
     ${childMember.icon}
   </section>
-    <h2 id="role">${member.role}</h2>
+    <h3 id="role">${member.role}</h3>
   </section>
   <section id="card-info">
     <p>ID: ${member.id}</p>
@@ -55,6 +58,7 @@ const generateMembers = (team) => {
   return str;
 }
 
+// Function to get the "Option" function from Manager, Engineer and Intern objects
 const getChildMember = (member) => {
   const childMember = {};
   if (member.role === "Manager") {

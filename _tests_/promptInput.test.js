@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const promptInput = require("../src/promptInput");
 
+// Mock the inquirer module
 jest.mock("inquirer");
 describe("PromptInput", () => {
   test("user input", async () => {

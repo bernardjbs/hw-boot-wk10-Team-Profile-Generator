@@ -1,3 +1,4 @@
+// Constasnts and variables
 const inquirer = require("inquirer");
 const promptInput = require("./src/promptInput");
 const fs = require("fs");
@@ -7,6 +8,7 @@ const Intern = require("./lib/intern");
 const render = require("./src/render");
 let teamMembersArr = [];
 
+// Function to validate the input 
 const validation = (input, inputType = '') => {
     if (!input) {
         return "Your input is empty, please try again";
@@ -34,6 +36,7 @@ const validation = (input, inputType = '') => {
     else { return true }
 };
 
+// Function to get data from user to build team members
 const buildMember = async (role) => {
     let member = {};
     const name = await promptInput(`${role}`, "input", `Please enter ${role}'s name:`, [], (input) => validation(input));
@@ -60,6 +63,7 @@ const buildMember = async (role) => {
     return teamMembersArr;
 }
 
+// Function to prompt if the user wants to add another team member
 const moreMember = async () => {
     const addMoreMember = await promptInput("moreMember", "confirm", "Do you wish to add another team member?");
     if (addMoreMember.moreMember) {
@@ -67,11 +71,13 @@ const moreMember = async () => {
     };
 };
 
+// Function to prompt user to choose from a list the role of the employee - Engineer or Intern
 const chooseTeamMember = async () => {
     const role = await promptInput("chooseTeamMember", "list", "Please choose your team member's role:", ["Engineer", "Intern"]);
     await buildMember(role.chooseTeamMember);
 };
 
+// Initialisation function to start the code
 const init = async () => {
     // Start building with the first team member as Manager.
     const team = await buildMember("Manager");
@@ -79,6 +85,7 @@ const init = async () => {
     fs.writeFileSync("./dist/index.html", buildTeam);
 }
 
+// Run the code
 init();
 
 module.exports = { validation, promptInput };

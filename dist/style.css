@@ -2,36 +2,72 @@
     --bgBlue: #2B4570;
     --yellowLight: #E3DC95;
 }
+/***** FONTS *****/
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 
+/***** UNIVERSAL SELECTOR *****/
+* {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #c9d5eb;
+}
+
+/***** HTML SELECTORS *****/
 h1 {
-    font-size: 4em;
+    background-color: var(--bgBlue);
+    font-size: 3em;
 }
 h2 {
     font-size: 2em;
     padding: 2px;
 }
 h3 {
-    font-size: 1.5em;
+    font-size: 1.75em;
 }
 
 p {
+    background-color: var(--bgBlue);
     padding: 2px;
 }
+
+a {
+    background-color: var(--bgBlue);
+    color: rgb(201, 137, 77);
+    text-decoration: none;
+}
+
+a:hover {
+    color:rgb(255, 65, 51)
+}
+
+/***** IDs *****/
 #heading {
-    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bgBlue);
+    color: var(--gold);
+    padding: 1em;
+    text-align: center;
+    height: 25vh;
+    font-weight: bold;
 }
 
 #team {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;}
+    flex-wrap: wrap;
+    margin-top: 5em;
+}
+
 
 #card-role { 
+    background-color: var(--bgBlue);
     display: flex;
     align-items: center;
 }
 
 #card-name {
+    background-color: var(--bgBlue);
     display: flex;
     align-items: center;
 }
@@ -40,6 +76,22 @@ p {
     margin-top: 5px;
 }
 
+#icons {
+    background-color: var(--bgBlue);
+    position: absolute;
+    top: 15px;
+    left: 265px;
+}
+#role {
+    background-color: var(--bgBlue);
+    color: orange;
+}
+
+#name {
+    background-color: var(--bgBlue);
+}
+
+/***** CLASSES *****/
 .member-card {
     position:relative;
     padding: 10px;
@@ -52,14 +104,6 @@ p {
 }
 
 .role-icon {
+    background-color: var(--bgBlue);
     width: 70px;
-}
-
-#manager-icon {
-    position: absolute;
-    top: 15px;
-    left: 265px;
-}
-#role {
-    color: orange;
 }
