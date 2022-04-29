@@ -64,6 +64,5 @@ Thank you. The HTML file for your team profile has been successfully created.
 A screenshot of the html page generated: 
 ![App Screenshot](./src/images/AppScreenshot.jpg)
 
-## Link to deployment application
-https://bernardjbs.github.io/hw-boot-wk10-Team-Profile-Generator/
+## Link video demo
 
