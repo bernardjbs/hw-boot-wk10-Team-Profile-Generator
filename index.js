@@ -68,6 +68,9 @@ const moreMember = async () => {
     const addMoreMember = await promptInput("moreMember", "confirm", "Do you wish to add another team member?");
     if (addMoreMember.moreMember) {
         await chooseTeamMember();
+    }
+    else {
+        console.info(`Thank you. The HTML file for your team profile has been successfully created.`)
     };
 };
 

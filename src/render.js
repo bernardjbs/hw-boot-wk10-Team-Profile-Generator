@@ -19,7 +19,7 @@ const html = (team) => {
 <body>
     <section id = "app">
         <section id="heading">
-            <h1>${team[0].name}'s team Profile</h1>
+            <h1>${team[0].name}'s Team Profile</h1>
         </section>
         <section id="team">
           ${generateMembers(team)}
